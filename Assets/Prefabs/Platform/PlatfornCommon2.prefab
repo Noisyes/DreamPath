@@ -59,7 +59,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.65, y: 0.2198053}
+  m_Size: {x: 0.7, y: 0.2198053}
   m_EdgeRadius: 0
 --- !u!50 &674364221990616910
 Rigidbody2D:
@@ -97,6 +97,7 @@ MonoBehaviour:
   curSpriteRender:
   - {fileID: 6521990563275979822}
   isSpike: 0
+  rdg: {fileID: 0}
 --- !u!1 &6521990563275979816
 GameObject:
   m_ObjectHideFlags: 0

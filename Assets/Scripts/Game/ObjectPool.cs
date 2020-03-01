@@ -41,8 +41,8 @@ public class ObjectPool : MonoBehaviour
         NewCommonPlatform();
         NewGrassrPlatform();
         NewNormalPlatform();
-        NewSpikeLeftlPlatform();
-        NewSpikeRightPlatform();
+      //  NewSpikeLeftlPlatform();
+       // NewSpikeRightPlatform();
         NewWinterPlatform();
     }
     public GameObject InstantiateObject(ref List<GameObject> list, GameObject prefab)

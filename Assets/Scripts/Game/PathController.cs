@@ -100,13 +100,11 @@ public class PathController : MonoBehaviour
         GameObject go;
         if(left)
         {
-            go = ObjectPool.Instance.GetPlatform(ref ObjectPool.Instance.SpikeLeftPlatform);
-            go.SetActive(true);
+            go = Instantiate(Vars.SpikePath[0]);
         }
         else
         {
-            go = ObjectPool.Instance.GetPlatform(ref ObjectPool.Instance.SpikeRightPlatform);
-            go.SetActive(true);
+            go = Instantiate(Vars.SpikePath[1]);
         }
         go.GetComponent<PathSelf>().Init(SelectedSprite);
         if (Dir == false)
@@ -204,4 +202,5 @@ public class PathController : MonoBehaviour
             NextPos += Vars.LeftDir; 
         }
     }
+
 }

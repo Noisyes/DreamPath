@@ -13,6 +13,9 @@ public class GamePanelController : MonoBehaviour
     private Text DiamondCount;
 
     private int Score = 0;
+
+    private int LastScore = 0;
+
     private void Awake()
     {
         EventCenter.AddListener(EventDefine.ScoreShow,ScoreUpdate);
@@ -60,6 +63,15 @@ public class GamePanelController : MonoBehaviour
     void ScoreUpdate()
     {
         Score++;
+        if(Score - LastScore>=50)
+        {
+            LastScore = Score;
+            GameCOntroller.Instance.TimeToFall -= 0.4f;
+            if(GameCOntroller.Instance.TimeToFall<0.3f)
+            {
+                GameCOntroller.Instance.TimeToFall = 0.3f;
+            }
+        }
         ScoreText.text = Score.ToString();
     }
 }

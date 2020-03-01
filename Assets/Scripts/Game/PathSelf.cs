@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipes;
 
-using UnityEngine;
+using DG.Tweening;
 
+using UnityEngine;
 public class PathSelf : MonoBehaviour
 {
     public List<SpriteRenderer> curSpriteRender = new List<SpriteRenderer>();
@@ -14,10 +15,47 @@ public class PathSelf : MonoBehaviour
 
     private Vector3? NextPos = null;
 
+    public Rigidbody2D rdg;
+
+    private float TimeTOFall;
+    private float Timer = 0f;
     private void Awake()
     {
         Vars = ManageVars.GetManageVars();
+        rdg = GetComponent<Rigidbody2D>();
+        TimeTOFall = GameCOntroller.Instance.TimeToFall;
     }
+
+    private void Update()
+    {
+        if (GameCOntroller.Instance.isGameStart == false || GameCOntroller.Instance.isGamePause == true || GameCOntroller.Instance.isGameOver == true)
+            return;
+        Timer += Time.deltaTime;
+        if (Timer >= TimeTOFall)
+        {
+            if (isSpike)
+            {
+                Timer = 0f;
+                rdg.bodyType = RigidbodyType2D.Dynamic;
+                rdg.constraints = RigidbodyConstraints2D.FreezeRotation;
+                Debug.Log("destroy spike");
+                Destroy(gameObject,0.8f);
+            }
+
+            Timer = 0f;
+            rdg.bodyType = RigidbodyType2D.Dynamic;
+            rdg.constraints = RigidbodyConstraints2D.FreezeRotation;
+            StartCoroutine("HidePath");
+        }
+    }
+
+    IEnumerator HidePath()
+    {
+        yield return new WaitForSeconds(0.8f);
+        rdg.bodyType = RigidbodyType2D.Static;
+        gameObject.SetActive(false);
+    }
+
     public void Init(Sprite SelectedSprite)
     {
         for (int i = 0; i < curSpriteRender.Count; i++)
@@ -35,7 +73,7 @@ public class PathSelf : MonoBehaviour
         }
         if (isSpike)
         {
-            int SpikePathContinueNumber = Random.Range(2, 4);
+            int SpikePathContinueNumber = Random.Range(1, 3);
             SpikePathContinue(SpikePathContinueNumber);
             EventCenter.AddListener<int>(EventDefine.SpikeContinue, SpikePathContinue);
         }
@@ -67,13 +105,14 @@ public class PathSelf : MonoBehaviour
             go.GetComponent<PathSelf>().Init(GameCOntroller.Instance.curTheme);
             go.transform.localPosition = (Vector3) NextPos;
             NextPos += new Vector3(dirToInstantiate.x, dirToInstantiate.y, 0);
-           // Debug.Log(NextPos);
+            // Debug.Log(NextPos);
         }
     }
 
     private void OnDestroy()
     {
-        /* if (isSpike)
-            EventCenter.RemoveListener<int>(EventDefine.SpikeContinue, SpikePathContinue); */
+        if (isSpike)
+            EventCenter.RemoveListener<int>(EventDefine.SpikeContinue, SpikePathContinue);
     }
+
 }

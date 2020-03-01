@@ -24,4 +24,6 @@ public class GameCOntroller : MonoBehaviour
     public Sprite curTheme = null;
 
     public Text Weak;
+
+    public float TimeToFall {get;set;} = 5f;
 }

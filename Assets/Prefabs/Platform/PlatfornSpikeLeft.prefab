@@ -344,7 +344,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.65, y: 0.2198053}
+  m_Size: {x: 0.7, y: 0.2198053}
   m_EdgeRadius: 0
 --- !u!50 &8402568492524774329
 Rigidbody2D:
@@ -383,3 +383,4 @@ MonoBehaviour:
   - {fileID: 2829099447888912601}
   - {fileID: 2829099447634970914}
   isSpike: 1
+  rdg: {fileID: 0}

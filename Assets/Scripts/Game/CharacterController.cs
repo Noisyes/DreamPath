@@ -130,13 +130,13 @@ public class CharacterController : MonoBehaviour
         if (IsLeft)
         {
             transform.localScale = new Vector3(-1, 1, 1);
-            transform.DOJump(NextLeftPos + Vector3.up * 0.4f, 0.5f + transform.position.y, 1, 0.3f);
+            transform.DOJump(NextLeftPos + Vector3.up * 0.4f, 0.5f + transform.position.y, 1, 0.2f);
 
         }
         else
         {
             transform.localScale = Vector3.one;
-            transform.DOJump(NextRightPos + Vector3.up * 0.4f, 0.5f + transform.position.y, 1, 0.3f);
+            transform.DOJump(NextRightPos + Vector3.up * 0.4f, 0.5f + transform.position.y, 1, 0.2f);
         }
     }
 
@@ -161,6 +161,7 @@ public class CharacterController : MonoBehaviour
             NextLeftPos = other.transform.position + new Vector3(Vars.LeftDir.x, Vars.LeftDir.y, 0);
             NextRightPos = other.transform.position + new Vector3(Vars.RightDir.x, Vars.RightDir.y, 0);
             EventCenter.Broadcast(EventDefine.ScoreShow);
+            //EventCenter.Broadcast<Transform>(EventDefine.Fall,other.transform);
         }
     }
 }

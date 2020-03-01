@@ -244,7 +244,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.65, y: 0.2198053}
+  m_Size: {x: 0.7, y: 0.2198053}
   m_EdgeRadius: 0
 --- !u!50 &6024318356263813243
 Rigidbody2D:
@@ -282,3 +282,4 @@ MonoBehaviour:
   curSpriteRender:
   - {fileID: 19066439650525979}
   isSpike: 0
+  rdg: {fileID: 0}

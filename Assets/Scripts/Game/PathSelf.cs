@@ -47,14 +47,14 @@ public class PathSelf : MonoBehaviour
         Transform Obstacle = transform.Find("Obstacle");
         if (Obstacle.localPosition.x < 0)
         {
-            if(NextPos == null)
-            NextPos = new Vector3(Vars.LeftDir.x, Vars.LeftDir.y, 0);
+            if (NextPos == null)
+                NextPos = new Vector3(Vars.LeftDir.x, Vars.LeftDir.y, 0);
             InstantiateSpike(Vars.LeftDir, SpikePathContinueNumber, Obstacle);
         }
         else
         {
-            if(NextPos == null )
-            NextPos = new Vector3(Vars.RightDir.x, Vars.RightDir.y, 0);
+            if (NextPos == null)
+                NextPos = new Vector3(Vars.RightDir.x, Vars.RightDir.y, 0);
             InstantiateSpike(Vars.RightDir, SpikePathContinueNumber, Obstacle);
         }
     }
@@ -65,15 +65,15 @@ public class PathSelf : MonoBehaviour
         {
             GameObject go = Instantiate(Vars.PathPrefab, parent);
             go.GetComponent<PathSelf>().Init(GameCOntroller.Instance.curTheme);
-            go.transform.localPosition = (Vector3)NextPos;
+            go.transform.localPosition = (Vector3) NextPos;
             NextPos += new Vector3(dirToInstantiate.x, dirToInstantiate.y, 0);
-            Debug.Log(NextPos);
+           // Debug.Log(NextPos);
         }
     }
 
     private void OnDestroy()
     {
-        if(isSpike)
-            EventCenter.RemoveListener<int>(EventDefine.SpikeContinue,SpikePathContinue);
+        /* if (isSpike)
+            EventCenter.RemoveListener<int>(EventDefine.SpikeContinue, SpikePathContinue); */
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -10,8 +11,11 @@ public class GamePanelController : MonoBehaviour
     private Button PauseButton;
     private Text ScoreText;
     private Text DiamondCount;
+
+    private int Score = 0;
     private void Awake()
     {
+        EventCenter.AddListener(EventDefine.ScoreShow,ScoreUpdate);
         EventCenter.AddListener(EventDefine.GamePanel, Show);
         PlayButton = transform.Find("PlayButton").GetComponent<Button>();
         PlayButton.onClick.AddListener(OnPlayButton);
@@ -28,6 +32,7 @@ public class GamePanelController : MonoBehaviour
     private void OnDestroy()
     {
         EventCenter.RemoveListener(EventDefine.GamePanel,OnPlayButton);
+        EventCenter.RemoveListener(EventDefine.ScoreShow,ScoreUpdate);
     }
     void Update()
     {
@@ -37,14 +42,24 @@ public class GamePanelController : MonoBehaviour
     {
         PlayButton.gameObject.SetActive(false);
         PauseButton.gameObject.SetActive(true);
+        Time.timeScale =0;
+        GameCOntroller.Instance.isGamePause = true;
     }
     void OnPauseButton()
     {
         PlayButton.gameObject.SetActive(true);
         PauseButton.gameObject.SetActive(false);
+        Time.timeScale = 1;
+        GameCOntroller.Instance.isGamePause = false;
     }
     void Show()
     {
         gameObject.SetActive(true);
+    }
+
+    void ScoreUpdate()
+    {
+        Score++;
+        ScoreText.text = Score.ToString();
     }
 }

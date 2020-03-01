@@ -100,11 +100,13 @@ public class PathController : MonoBehaviour
         GameObject go;
         if(left)
         {
-            go = Instantiate(Vars.SpikePath[0]);
+            go = ObjectPool.Instance.GetPlatform(ref ObjectPool.Instance.SpikeLeftPlatform);
+            go.SetActive(true);
         }
         else
         {
-            go = Instantiate(Vars.SpikePath[1]);
+            go = ObjectPool.Instance.GetPlatform(ref ObjectPool.Instance.SpikeRightPlatform);
+            go.SetActive(true);
         }
         go.GetComponent<PathSelf>().Init(SelectedSprite);
         if (Dir == false)
@@ -121,7 +123,8 @@ public class PathController : MonoBehaviour
 
     void InstantiatePath()
     {
-        GameObject go = Instantiate(PathPrefab);
+        GameObject go = ObjectPool.Instance.GetPlatform(ref ObjectPool.Instance.NormalPlatform);
+        go.SetActive(true);
         go.GetComponent<PathSelf>().Init(SelectedSprite);
         if (Dir == false)
         {
@@ -137,8 +140,9 @@ public class PathController : MonoBehaviour
 
     void InstantiateCommonPath()
     {
-        int index = Random.Range(0, Vars.CommonPath.Count);
-        GameObject go = Instantiate(Vars.CommonPath[index]);
+        //int index = Random.Range(0, Vars.CommonPath.Count);
+        GameObject go = ObjectPool.Instance.GetPlatform(ref ObjectPool.Instance.CommonPlatform);
+        go.SetActive(true);
         go.GetComponent<PathSelf>().Init(SelectedSprite);
         if (Dir == false)
         {
@@ -167,8 +171,9 @@ public class PathController : MonoBehaviour
 
     void InstantiateWinterPath()
     {
-        int index = Random.Range(0, Vars.WinterPath.Count);
-        GameObject go = Instantiate(Vars.WinterPath[index]);
+       // int index = Random.Range(0, Vars.WinterPath.Count);
+        GameObject go = ObjectPool.Instance.GetPlatform(ref ObjectPool.Instance.WinterPlatform);
+        go.SetActive(true);
         go.GetComponent<PathSelf>().Init(SelectedSprite);
         if (Dir == false)
         {
@@ -184,8 +189,9 @@ public class PathController : MonoBehaviour
 
     void InstantiateGrassPath()
     {
-        int index = Random.Range(0, Vars.GrassPath.Count);
-        GameObject go = Instantiate(Vars.GrassPath[index]);
+        //int index = Random.Range(0, Vars.GrassPath.Count);
+        GameObject go = ObjectPool.Instance.GetPlatform(ref ObjectPool.Instance.GrassPlatform);
+        go.SetActive(true);
         go.GetComponent<PathSelf>().Init(SelectedSprite);
         if (Dir == false)
         {

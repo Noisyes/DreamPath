@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 using UnityEngine;
-
+using UnityEngine.UI;
 public class GameCOntroller : MonoBehaviour
 {
     private static GameCOntroller _instance;
@@ -19,7 +19,9 @@ public class GameCOntroller : MonoBehaviour
     }
     
     public bool isGameStart = false;
-    public bool isGamepause = false;
-
+    public bool isGamePause = false;
+    public bool isGameOver = false;
     public Sprite curTheme = null;
+
+    public Text Weak;
 }

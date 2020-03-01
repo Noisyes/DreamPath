@@ -31,6 +31,7 @@ public class UIController : MonoBehaviour
     private void OnStartButton()
     {
         GameCOntroller.Instance.isGameStart = true;
+        //Time.timeScale = 1;
         gameObject.SetActive(false);
         EventCenter.Broadcast(EventDefine.GamePanel);
     }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1451196218919109236}
   - component: {fileID: 7519335880056026251}
   - component: {fileID: 4791942852558820989}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: normal
   m_TagString: Path
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.019798413, y: -0.12858152}
+  m_Offset: {x: -0.006070599, y: -0.12858152}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -105,7 +105,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6027272, y: 0.2198053}
+  m_Size: {x: 0.65, y: 0.2198053}
   m_EdgeRadius: 0
 --- !u!114 &4791942852558820989
 MonoBehaviour:
@@ -121,3 +121,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curSpriteRender:
   - {fileID: 1451196218919109236}
+  isSpike: 0

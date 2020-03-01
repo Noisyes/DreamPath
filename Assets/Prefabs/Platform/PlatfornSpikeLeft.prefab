@@ -193,7 +193,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00000017881393, y: 0.3071854}
+  m_Offset: {x: -0.00000014901161, y: 0.35071123}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -204,7 +204,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7247399, y: 0.7404938}
+  m_Size: {x: 0.42851704, y: 0.65344214}
   m_EdgeRadius: 0
 --- !u!1 &2829099447888912607
 GameObject:
@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 1763305316794748918}
   - component: {fileID: 8402568492524774329}
   - component: {fileID: 3063013516258187584}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlatfornSpikeLeft
   m_TagString: Path
   m_Icon: {fileID: 0}
@@ -333,7 +333,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.019798413, y: -0.12858152}
+  m_Offset: {x: 0.0019827187, y: -0.12858152}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -344,7 +344,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6027272, y: 0.2198053}
+  m_Size: {x: 0.65, y: 0.2198053}
   m_EdgeRadius: 0
 --- !u!50 &8402568492524774329
 Rigidbody2D:

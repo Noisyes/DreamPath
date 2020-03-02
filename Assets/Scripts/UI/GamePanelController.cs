@@ -1,6 +1,6 @@
-﻿using System.IO;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,14 +12,16 @@ public class GamePanelController : MonoBehaviour
     private Text ScoreText;
     private Text DiamondCount;
 
-    private int Score = 0;
+    public int Score { get; set; } = 0;
+    public int DiamondScore { get; set; } = 0;
 
-    private int LastScore = 0;
+    public int LastScore { get; set; } = 0;
 
     private void Awake()
     {
-        EventCenter.AddListener(EventDefine.ScoreShow,ScoreUpdate);
+        EventCenter.AddListener(EventDefine.ScoreShow, ScoreUpdate);
         EventCenter.AddListener(EventDefine.GamePanel, Show);
+        EventCenter.AddListener(EventDefine.DiamondScoreUp, DiamondScoreToUp);
         PlayButton = transform.Find("PlayButton").GetComponent<Button>();
         PlayButton.onClick.AddListener(OnPlayButton);
         PauseButton = transform.Find("PauseButton").GetComponent<Button>();
@@ -34,18 +36,15 @@ public class GamePanelController : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventCenter.RemoveListener(EventDefine.GamePanel,OnPlayButton);
-        EventCenter.RemoveListener(EventDefine.ScoreShow,ScoreUpdate);
-    }
-    void Update()
-    {
-
+        EventCenter.RemoveListener(EventDefine.ScoreShow, ScoreUpdate);
+        EventCenter.RemoveListener(EventDefine.DiamondScoreUp, DiamondScoreToUp);
+        EventCenter.RemoveListener(EventDefine.GamePanel, Show);
     }
     void OnPlayButton()
     {
         PlayButton.gameObject.SetActive(false);
         PauseButton.gameObject.SetActive(true);
-        Time.timeScale =0;
+        Time.timeScale = 0;
         GameCOntroller.Instance.isGamePause = true;
     }
     void OnPauseButton()
@@ -63,15 +62,20 @@ public class GamePanelController : MonoBehaviour
     void ScoreUpdate()
     {
         Score++;
-        if(Score - LastScore>=50)
+        if (Score - LastScore >= 50)
         {
             LastScore = Score;
             GameCOntroller.Instance.TimeToFall -= 0.4f;
-            if(GameCOntroller.Instance.TimeToFall<0.3f)
+            if (GameCOntroller.Instance.TimeToFall < 0.3f)
             {
                 GameCOntroller.Instance.TimeToFall = 0.3f;
             }
         }
         ScoreText.text = Score.ToString();
+    }
+    void DiamondScoreToUp()
+    {
+        DiamondScore++;
+        DiamondCount.text = DiamondScore.ToString();
     }
 }

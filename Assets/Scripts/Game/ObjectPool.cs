@@ -1,7 +1,7 @@
-﻿using System.Transactions;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Transactions;
 
 using UnityEngine;
 
@@ -41,8 +41,8 @@ public class ObjectPool : MonoBehaviour
         NewCommonPlatform();
         NewGrassrPlatform();
         NewNormalPlatform();
-      //  NewSpikeLeftlPlatform();
-       // NewSpikeRightPlatform();
+        //  NewSpikeLeftlPlatform();
+        // NewSpikeRightPlatform();
         NewWinterPlatform();
     }
     public GameObject InstantiateObject(ref List<GameObject> list, GameObject prefab)
@@ -119,10 +119,15 @@ public class ObjectPool : MonoBehaviour
         {
             if (list[i].activeInHierarchy == false)
             {
+                list[i].GetComponent<PathSelf>().Timer = 0f;
+                list[i].GetComponent<PathSelf>().rdg.bodyType = RigidbodyType2D.Static;
                 return list[i];
             }
         }
         int index = Random.Range(0, list.Count);
-        return InstantiateObject(ref list, list[index]);//TODO: 有没有设置成Spike的物体导致移除监听失败
+        GameObject tmp = InstantiateObject(ref list, list[index]);
+        tmp.GetComponent<PathSelf>().Timer = 0f;
+        tmp.GetComponent<PathSelf>().rdg.bodyType = RigidbodyType2D.Static;
+        return tmp; 
     }
 }

@@ -14,6 +14,15 @@ public class UIController : MonoBehaviour
     private void Awake()
     {
         Init();
+
+    }
+
+    private void Start()
+    {
+        if (GameData.isRestartGame == true)
+        {
+            OnStartButton();
+        }
     }
 
     void Init()
@@ -31,7 +40,6 @@ public class UIController : MonoBehaviour
     private void OnStartButton()
     {
         GameCOntroller.Instance.isGameStart = true;
-        //Time.timeScale = 1;
         gameObject.SetActive(false);
         EventCenter.Broadcast(EventDefine.GamePanel);
     }

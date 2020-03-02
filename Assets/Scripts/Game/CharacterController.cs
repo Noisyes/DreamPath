@@ -1,14 +1,14 @@
-﻿using System.Diagnostics.Tracing;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 using DG.Tweening;
 
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class CharacterController : MonoBehaviour
 {
@@ -36,27 +36,33 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(transform.position - new Vector3(0f, 0.15f, 0f), Vector2.right * 0.5f);
-        Debug.DrawRay(transform.position - new Vector3(0f, 0.15f, 0f), Vector2.left * 0.5f);
-        if(EventSystem.current.IsPointerOverGameObject())
-            return ;
+        /*         Debug.DrawRay(transform.position - new Vector3(0f, 0.15f, 0f), Vector2.right * 0.5f);
+                Debug.DrawRay(transform.position - new Vector3(0f, 0.15f, 0f), Vector2.left * 0.5f); */
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
 
         if (GameCOntroller.Instance.isGameStart == false)
         {
             return;
         }
-        if (GameCOntroller.Instance.isGameOver == true||GameCOntroller.Instance.isGamePause == true)
+        if (GameCOntroller.Instance.isGameOver == true || GameCOntroller.Instance.isGamePause == true)
         {
             //Time.timeScale = 0;
             return;
         }
-
+        if ((transform.position.y - Camera.main.transform.position.y) < -4 && GameCOntroller.Instance.isGameOver == false)
+        {
+            GameCOntroller.Instance.isGameOver = true;
+            GameCOntroller.Instance.Weak.gameObject.SetActive(true);
+            GameCOntroller.Instance.Weak.DOColor(new Color(120, 0, 0, 0), 1.5f).From().OnComplete(ShowGameOverPanel);
+            gameObject.SetActive(false);
+            return;
+        }
         if (Input.GetMouseButtonDown(0) && isJumping == false)
         {
             EventCenter.Broadcast(EventDefine.PathCreate);
             EventCenter.Broadcast<int>(EventDefine.SpikeContinue, 1);
             MousePos = Input.mousePosition;
-            //Debug.Log(MousePos);
             if (MousePos.x <= Screen.width / 2)
             {
                 IsLeft = true;
@@ -72,18 +78,18 @@ public class CharacterController : MonoBehaviour
         {
             Destroy(gameObject);
             GameCOntroller.Instance.Weak.gameObject.SetActive(true);
-            GameCOntroller.Instance.Weak.DOColor(new Color(120,0,0,0),1.5f).From(); 
+            GameCOntroller.Instance.Weak.DOColor(new Color(120, 0, 0, 0), 1.5f).From().OnComplete(ShowGameOverPanel);;
             EventCenter.Broadcast(EventDefine.CameraFollow);
-            //Time.timeScale = 0;
             GameCOntroller.Instance.isGameOver = true;
         }
         if (IsCastCollider() == false && GameCOntroller.Instance.isGameOver == false && rgd.velocity.y < 0)
         {
             GameCOntroller.Instance.isGameOver = true;
+            GameCOntroller.Instance.Weak.gameObject.SetActive(true);
+            GameCOntroller.Instance.Weak.DOColor(new Color(120, 0, 0, 0), 1.5f).From().OnComplete(ShowGameOverPanel);;
             GetComponent<SpriteRenderer>().sortingLayerName = "Path";
             GetComponent<SpriteRenderer>().sortingOrder = -1;
             GetComponent<BoxCollider2D>().enabled = false;
-            //rgd.bodyType = RigidbodyType2D.Static;
         }
 
     }
@@ -144,24 +150,28 @@ public class CharacterController : MonoBehaviour
     {
         if (other.tag == "Path")
         {
-/*             if(LastPlatform ==null)
-                LastPlatform = other.gameObject;
-            else
-            {
-                if(other.gameObject == LastPlatform)
-                {
-                    return ;
-                }
-                else
-                {
-                    LastPlatform = other.gameObject;
-                }
-            } */ //防止触发两次相同的平台，但是目前没有问题
+            /*             if(LastPlatform ==null)
+                            LastPlatform = other.gameObject;
+                        else
+                        {
+                            if(other.gameObject == LastPlatform)
+                            {
+                                return ;
+                            }
+                            else
+                            {
+                                LastPlatform = other.gameObject;
+                            }
+                        } */ //防止触发两次相同的平台，但是目前没有问题
             isJumping = false;
             NextLeftPos = other.transform.position + new Vector3(Vars.LeftDir.x, Vars.LeftDir.y, 0);
             NextRightPos = other.transform.position + new Vector3(Vars.RightDir.x, Vars.RightDir.y, 0);
             EventCenter.Broadcast(EventDefine.ScoreShow);
             //EventCenter.Broadcast<Transform>(EventDefine.Fall,other.transform);
         }
+    }
+    void ShowGameOverPanel()
+    {
+        EventCenter.Broadcast(EventDefine.ShowGameOverPanel);
     }
 }

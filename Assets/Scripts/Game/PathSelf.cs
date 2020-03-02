@@ -17,13 +17,26 @@ public class PathSelf : MonoBehaviour
 
     public Rigidbody2D rdg;
 
-    private float TimeTOFall;
-    private float Timer = 0f;
+    public float TimeTOFall;
+    public float Timer = 0f;
+
+    public bool IsFall = false;
+
     private void Awake()
     {
         Vars = ManageVars.GetManageVars();
         rdg = GetComponent<Rigidbody2D>();
         TimeTOFall = GameCOntroller.Instance.TimeToFall;
+    }
+
+    private void Start()
+    {
+        int isInstantiateDiamond = Random.Range(0, 10);
+        if (isInstantiateDiamond == 6)
+        {
+            GameObject go = Instantiate(Vars.DiamondPrefab);
+            go.transform.position = transform.position + Vector3.up * 0.5f;
+        }
     }
 
     private void Update()
@@ -33,13 +46,13 @@ public class PathSelf : MonoBehaviour
         Timer += Time.deltaTime;
         if (Timer >= TimeTOFall)
         {
+            IsFall = true;
             if (isSpike)
             {
                 Timer = 0f;
                 rdg.bodyType = RigidbodyType2D.Dynamic;
                 rdg.constraints = RigidbodyConstraints2D.FreezeRotation;
-                Debug.Log("destroy spike");
-                Destroy(gameObject,0.8f);
+                Destroy(gameObject, 0.8f);
             }
 
             Timer = 0f;
@@ -53,6 +66,7 @@ public class PathSelf : MonoBehaviour
     {
         yield return new WaitForSeconds(0.8f);
         rdg.bodyType = RigidbodyType2D.Static;
+        Timer = 0f;
         gameObject.SetActive(false);
     }
 
@@ -105,7 +119,6 @@ public class PathSelf : MonoBehaviour
             go.GetComponent<PathSelf>().Init(GameCOntroller.Instance.curTheme);
             go.transform.localPosition = (Vector3) NextPos;
             NextPos += new Vector3(dirToInstantiate.x, dirToInstantiate.y, 0);
-            // Debug.Log(NextPos);
         }
     }
 

@@ -1,4 +1,4 @@
 ﻿public enum EventDefine
 {
-    GamePanel,PathCreate,SpikeContinue,CameraFollow,ScoreShow,Fall,
+    GamePanel,PathCreate,SpikeContinue,CameraFollow,ScoreShow,Fall,DiamondScoreUp,ShowGameOverPanel,
 }

@@ -44,3 +44,5 @@ MonoBehaviour:
   SpikePath:
   - {fileID: 8402568492524774328, guid: 96177fa5e1b9a2d4dad83d0f5a9d46e0, type: 3}
   - {fileID: 8402568492524774328, guid: 622da5fb2e035e34392fd7559ae3234f, type: 3}
+  DiamondPrefab: {fileID: 3979925122356323994, guid: 24ebcf9ab8bfd684cb0e4ec27b2752aa,
+    type: 3}

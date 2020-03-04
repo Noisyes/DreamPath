@@ -46,3 +46,10 @@ MonoBehaviour:
   - {fileID: 8402568492524774328, guid: 622da5fb2e035e34392fd7559ae3234f, type: 3}
   DiamondPrefab: {fileID: 3979925122356323994, guid: 24ebcf9ab8bfd684cb0e4ec27b2752aa,
     type: 3}
+  CharacterSpriteList:
+  - {fileID: 21300000, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
+  - {fileID: 21300004, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
+  - {fileID: 21300008, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
+  - {fileID: 21300012, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
+  SkinChoose: {fileID: 3227330817107515637, guid: 922f748315bce0e49807f4f0e1edc686,
+    type: 3}

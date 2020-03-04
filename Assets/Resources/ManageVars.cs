@@ -30,5 +30,8 @@ public class ManageVars : ScriptableObject
     public List<GameObject> SpikePath = new List<GameObject>();
 
     public GameObject DiamondPrefab;
+    public List<Sprite> CharacterSpriteList = new List<Sprite>(); 
+
+    public GameObject SkinChoose;
 
 }

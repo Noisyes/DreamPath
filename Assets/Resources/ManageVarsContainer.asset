@@ -53,3 +53,9 @@ MonoBehaviour:
   - {fileID: 21300012, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
   SkinChoose: {fileID: 3227330817107515637, guid: 922f748315bce0e49807f4f0e1edc686,
     type: 3}
+  CharacterName:
+  - "\u6069\u683C\u9C81\u4EBA"
+  - "\u5FCD\u8005"
+  - "\u5C0F\u7EFF\u5E3D"
+  - "\u5C0F\u50F5\u5C38"
+  CharacterCost: 0000000032000000c8000000f4010000

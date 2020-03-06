@@ -8402,7 +8402,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: $ 100
+  m_Text: $ 10
 --- !u!222 &1607696472
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9003,6 +9003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ada97f302bad64781c0db4c0a301c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TOBackScrollIndex: 0
 --- !u!1 &1948458203
 GameObject:
   m_ObjectHideFlags: 0

@@ -38,6 +38,7 @@ public class GameOverPanel : MonoBehaviour
         CurScore.text = GamePanel.GetComponent<GamePanelController>().Score.ToString();
         BestScore.text = "最高分  " + GamePanel.GetComponent<GamePanelController>().Score.ToString();
         DiamondScore.text = "+" + GamePanel.GetComponent<GamePanelController>().DiamondScore.ToString();
+        GameCOntroller.Instance.Restore();
         gameObject.SetActive(true);
         
     }

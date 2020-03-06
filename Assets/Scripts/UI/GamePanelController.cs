@@ -76,6 +76,8 @@ public class GamePanelController : MonoBehaviour
     void DiamondScoreToUp()
     {
         DiamondScore++;
+        GameCOntroller.Instance.DiamondCount++;
+//        Debug.Log(GameCOntroller.Instance.DiamondCount);
         DiamondCount.text = DiamondScore.ToString();
     }
 }

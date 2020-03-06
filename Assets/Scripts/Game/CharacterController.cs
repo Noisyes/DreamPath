@@ -30,9 +30,21 @@ public class CharacterController : MonoBehaviour
     private void Awake()
     {
         Vars = ManageVars.GetManageVars();
+        EventCenter.AddListener(EventDefine.CharacterChangeSkin, CharacterChangeSkin);
         rgd = GetComponent<Rigidbody2D>();
     }
-
+    private void OnDestroy()
+    {
+        EventCenter.RemoveListener(EventDefine.CharacterChangeSkin, CharacterChangeSkin);
+    }
+    private void Start()
+    {
+        GetComponent<SpriteRenderer>().sprite = Vars.SkinChoose.GetComponent<Image>().sprite;
+    }
+    void CharacterChangeSkin()
+    {
+        GetComponent<SpriteRenderer>().sprite = Vars.SkinChoose.GetComponent<Image>().sprite;
+    }
     // Update is called once per frame
     void Update()
     {

@@ -59,3 +59,15 @@ MonoBehaviour:
   - "\u5C0F\u7EFF\u5E3D"
   - "\u5C0F\u50F5\u5C38"
   CharacterCost: 0000000032000000c8000000f4010000
+  BackCharacter:
+  - {fileID: 21300002, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
+  - {fileID: 21300006, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
+  - {fileID: 21300010, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
+  - {fileID: 21300014, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
+  ButtonClip: {fileID: 8300000, guid: 43f93bf9979e34d46a862c1fe448a414, type: 3}
+  JumpClip: {fileID: 8300000, guid: a07e7d5471e1e064fba0717467121bcc, type: 3}
+  DiamondClip: {fileID: 8300000, guid: e86d628ae2bb99c43805e503b83ce21e, type: 3}
+  FallClip: {fileID: 8300000, guid: 2c7dc4466a66a8744a217ad78d143749, type: 3}
+  HitClip: {fileID: 8300000, guid: 58036858fa184e44cbeb01894c87e6fa, type: 3}
+  MuteImage: {fileID: 21300002, guid: 95b20d8a0bda8324bb68c78c9e50479c, type: 3}
+  NoMuteImage: {fileID: 21300000, guid: 95b20d8a0bda8324bb68c78c9e50479c, type: 3}

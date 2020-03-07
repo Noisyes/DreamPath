@@ -6,6 +6,7 @@ using System.Net.Mime;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using DG.Tweening;
 public class ShopPanleController : MonoBehaviour
 {
     ManageVars Vars;
@@ -19,6 +20,8 @@ public class ShopPanleController : MonoBehaviour
     private Button BackToMainButton;
 
     private Text DiamondText;
+
+    
 
     private void Awake()
     {
@@ -45,24 +48,34 @@ public class ShopPanleController : MonoBehaviour
 
     void BackTOMain()
     {
+        AudioSource.PlayClipAtPoint(ManageVars.GetManageVars().ButtonClip,transform.position);
         EventCenter.Broadcast(EventDefine.ShowMainUI);
         gameObject.SetActive(false);
     }
     void BuyCharacter()
     {
+        if(GameCOntroller.Instance.isMusicOn)
+        AudioSource.PlayClipAtPoint(ManageVars.GetManageVars().ButtonClip,transform.position);
         int index = transform.Find("ScrollRect").GetComponent<DragController>().TOBackScrollIndex;
         int result = Vars.CharacterCost[index];
-        if(GameCOntroller.Instance.DiamondCount>=result)
+        if (GameCOntroller.Instance.DiamondCount >= result)
         {
-            GameCOntroller.Instance.DiamondCount-= result;
+            GameCOntroller.Instance.DiamondCount -= result;
             GameCOntroller.Instance.CharacterIsUnlock[index] = true;
             ShowBuyOrSelectButton(true);
             DiamondText.text = GameCOntroller.Instance.DiamondCount.ToString();
             EventCenter.Broadcast(EventDefine.ShowGreyForCharacter);
         }
+        else
+        {
+            Text textForDiamond = BuyButton.transform.Find("Text").GetComponent<Text>();
+            textForDiamond.DOColor(Color.red,0.1f).SetEase(Ease.InBounce).SetLoops(3).From();
+        }
     }
     void SelectCharacter()
     {
+        if(GameCOntroller.Instance.isMusicOn)
+        AudioSource.PlayClipAtPoint(ManageVars.GetManageVars().ButtonClip,transform.position);
         int index = transform.Find("ScrollRect").GetComponent<DragController>().TOBackScrollIndex;
         Debug.Log(index);
         Vars.SkinChoose.GetComponent<Image>().sprite = Vars.BackCharacter[index];

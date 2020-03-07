@@ -42,6 +42,8 @@ public class GamePanelController : MonoBehaviour
     }
     void OnPlayButton()
     {
+        if(GameCOntroller.Instance.isMusicOn)
+        AudioSource.PlayClipAtPoint(ManageVars.GetManageVars().ButtonClip,transform.position);
         PlayButton.gameObject.SetActive(false);
         PauseButton.gameObject.SetActive(true);
         Time.timeScale = 0;
@@ -49,6 +51,8 @@ public class GamePanelController : MonoBehaviour
     }
     void OnPauseButton()
     {
+        if(GameCOntroller.Instance.isMusicOn)
+        AudioSource.PlayClipAtPoint(ManageVars.GetManageVars().ButtonClip,transform.position);
         PlayButton.gameObject.SetActive(true);
         PauseButton.gameObject.SetActive(false);
         Time.timeScale = 1;

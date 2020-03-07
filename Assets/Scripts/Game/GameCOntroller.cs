@@ -65,13 +65,13 @@ public class GameCOntroller : MonoBehaviour
     public Sprite curTheme = null;
     public Text Weak;
     public bool isFirstGame { get; set; }
-    public bool isMusicOn { get; set; }
+    public bool isMusicOn { get; set; } = true;
     public int[] BestScore { get; set; }
     public int SelectCharacterIndex { get; set; }
     public bool[] CharacterIsUnlock { get; set; }
 
     public int DiamondCount { get; set; }
-    public float TimeToFall { get; set; } = 5f;
+    public float TimeToFall { get; set; } = 3.5f;
 
     void Load()
     {
@@ -109,5 +109,9 @@ public class GameCOntroller : MonoBehaviour
         {
             Debug.Log(e.Message);
         }
+    }
+    private void OnDestroy()
+    {
+        Restore();
     }
 }

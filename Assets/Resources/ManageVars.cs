@@ -38,4 +38,11 @@ public class ManageVars : ScriptableObject
 
     public int[] CharacterCost;
     public List<Sprite> BackCharacter = new List<Sprite>();
+    public AudioClip ButtonClip;
+    public AudioClip JumpClip;
+    public AudioClip DiamondClip;
+    public AudioClip FallClip;
+    public AudioClip HitClip;
+    public Sprite MuteImage;
+    public Sprite NoMuteImage;
 }

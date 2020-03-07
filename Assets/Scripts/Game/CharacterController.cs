@@ -13,6 +13,8 @@ using UnityEngine.UI;
 public class CharacterController : MonoBehaviour
 {
     private ManageVars Vars;
+
+    private AudioSource CharacterAudio;
     private Vector2 MousePos;
     private bool IsLeft = false;
     private bool isJumping = false;
@@ -30,12 +32,16 @@ public class CharacterController : MonoBehaviour
     private void Awake()
     {
         Vars = ManageVars.GetManageVars();
+        EventCenter.AddListener(EventDefine.Mute,Mute);
         EventCenter.AddListener(EventDefine.CharacterChangeSkin, CharacterChangeSkin);
         rgd = GetComponent<Rigidbody2D>();
+        CharacterAudio = GetComponent<AudioSource>();
+        Mute();
     }
     private void OnDestroy()
     {
         EventCenter.RemoveListener(EventDefine.CharacterChangeSkin, CharacterChangeSkin);
+        EventCenter.RemoveListener(EventDefine.Mute,Mute);
     }
     private void Start()
     {
@@ -70,7 +76,7 @@ public class CharacterController : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
-        if (Input.GetMouseButtonDown(0) && isJumping == false)
+        if (Input.GetMouseButtonDown(0) && isJumping == false&&NextRightPos!=Vector3.zero&&NextLeftPos!=Vector3.zero)
         {
             EventCenter.Broadcast(EventDefine.PathCreate);
             EventCenter.Broadcast<int>(EventDefine.SpikeContinue, 1);
@@ -88,17 +94,20 @@ public class CharacterController : MonoBehaviour
         }
         if (IsCastObstacle() == true)
         {
-            Destroy(gameObject);
+            CharacterAudio.PlayOneShot(Vars.HitClip);
+            //Destroy(gameObject);
+            GetComponent<SpriteRenderer>().enabled = false;
             GameCOntroller.Instance.Weak.gameObject.SetActive(true);
-            GameCOntroller.Instance.Weak.DOColor(new Color(120, 0, 0, 0), 1.5f).From().OnComplete(ShowGameOverPanel);;
+            GameCOntroller.Instance.Weak.DOColor(new Color(120, 0, 0, 0), 1.5f).From().OnComplete(ShowGameOverPanel);
             EventCenter.Broadcast(EventDefine.CameraFollow);
             GameCOntroller.Instance.isGameOver = true;
         }
         if (IsCastCollider() == false && GameCOntroller.Instance.isGameOver == false && rgd.velocity.y < 0)
         {
+            CharacterAudio.PlayOneShot(Vars.FallClip);
             GameCOntroller.Instance.isGameOver = true;
             GameCOntroller.Instance.Weak.gameObject.SetActive(true);
-            GameCOntroller.Instance.Weak.DOColor(new Color(120, 0, 0, 0), 1.5f).From().OnComplete(ShowGameOverPanel);;
+            GameCOntroller.Instance.Weak.DOColor(new Color(120, 0, 0, 0), 1.5f).From().OnComplete(ShowGameOverPanel);
             GetComponent<SpriteRenderer>().sortingLayerName = "Path";
             GetComponent<SpriteRenderer>().sortingOrder = -1;
             GetComponent<BoxCollider2D>().enabled = false;
@@ -145,16 +154,17 @@ public class CharacterController : MonoBehaviour
     void Jump()
     {
         isJumping = true;
+        CharacterAudio.PlayOneShot(Vars.JumpClip);
         if (IsLeft)
         {
             transform.localScale = new Vector3(-1, 1, 1);
-            transform.DOJump(NextLeftPos + Vector3.up * 0.4f, 0.5f + transform.position.y, 1, 0.2f);
+            transform.DOJump(NextLeftPos + Vector3.up * 0.4f, 0.5f + transform.position.y, 1, 0.15f);
 
         }
         else
         {
             transform.localScale = Vector3.one;
-            transform.DOJump(NextRightPos + Vector3.up * 0.4f, 0.5f + transform.position.y, 1, 0.2f);
+            transform.DOJump(NextRightPos + Vector3.up * 0.4f, 0.5f + transform.position.y, 1, 0.15f);
         }
     }
 
@@ -185,5 +195,17 @@ public class CharacterController : MonoBehaviour
     void ShowGameOverPanel()
     {
         EventCenter.Broadcast(EventDefine.ShowGameOverPanel);
+    }
+
+    void Mute()
+    {
+        if(GameCOntroller.Instance.isMusicOn)
+        {
+            CharacterAudio.volume = 1;
+        }
+        else
+        {
+            CharacterAudio.volume = 0;
+        }
     }
 }

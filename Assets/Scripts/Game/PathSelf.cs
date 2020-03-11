@@ -22,6 +22,9 @@ public class PathSelf : MonoBehaviour
 
     public bool IsFall = false;
 
+    public bool NeedDiamond = true;
+
+
     private void Awake()
     {
         Vars = ManageVars.GetManageVars();
@@ -30,6 +33,16 @@ public class PathSelf : MonoBehaviour
     }
 
     private void Start()
+    {
+        if (NeedDiamond)
+        {
+            InstantiateDiamond();
+            NeedDiamond = false;
+        }
+
+    }
+
+    void InstantiateDiamond()
     {
         int isInstantiateDiamond = Random.Range(0, 10);
         if (isInstantiateDiamond == 6)
@@ -44,6 +57,11 @@ public class PathSelf : MonoBehaviour
         if (GameCOntroller.Instance.isGameStart == false || GameCOntroller.Instance.isGamePause == true || GameCOntroller.Instance.isGameOver == true)
             return;
         Timer += Time.deltaTime;
+        if (NeedDiamond)
+        {
+            InstantiateDiamond();
+            NeedDiamond = false;
+        }
         if (Timer >= TimeTOFall)
         {
             IsFall = true;

@@ -121,6 +121,7 @@ public class ObjectPool : MonoBehaviour
             {
                 list[i].GetComponent<PathSelf>().Timer = 0f;
                 list[i].GetComponent<PathSelf>().rdg.bodyType = RigidbodyType2D.Static;
+                list[i].GetComponent<PathSelf>().NeedDiamond = true;
                 return list[i];
             }
         }
@@ -128,6 +129,7 @@ public class ObjectPool : MonoBehaviour
         GameObject tmp = InstantiateObject(ref list, list[index]);
         tmp.GetComponent<PathSelf>().Timer = 0f;
         tmp.GetComponent<PathSelf>().rdg.bodyType = RigidbodyType2D.Static;
+        tmp.GetComponent<PathSelf>().NeedDiamond = true;
         return tmp; 
     }
 }

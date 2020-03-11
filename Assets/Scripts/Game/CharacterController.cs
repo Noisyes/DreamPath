@@ -45,11 +45,11 @@ public class CharacterController : MonoBehaviour
     }
     private void Start()
     {
-        GetComponent<SpriteRenderer>().sprite = Vars.SkinChoose.GetComponent<Image>().sprite;
+        GetComponent<SpriteRenderer>().sprite = Vars.BackCharacter[GameCOntroller.Instance.SelectCharacterIndex];
     }
     void CharacterChangeSkin()
     {
-        GetComponent<SpriteRenderer>().sprite = Vars.SkinChoose.GetComponent<Image>().sprite;
+        GetComponent<SpriteRenderer>().sprite = Vars.BackCharacter[GameCOntroller.Instance.SelectCharacterIndex];
     }
     // Update is called once per frame
     void Update()

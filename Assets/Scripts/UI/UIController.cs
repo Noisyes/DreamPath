@@ -27,6 +27,7 @@ public class UIController : MonoBehaviour
         {
             OnStartButton();
         }
+        ToLookSkin();
         if (GameCOntroller.Instance.isMusicOn)
         {
             Debug.Log("wah");

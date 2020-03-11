@@ -10,6 +10,7 @@ public class DiamondSelf : MonoBehaviour
     private void Awake()
     {
         Vars = ManageVars.GetManageVars();
+        Destroy(gameObject,GameCOntroller.Instance.TimeToFall);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
